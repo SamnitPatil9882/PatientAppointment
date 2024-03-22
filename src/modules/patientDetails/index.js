@@ -11,57 +11,9 @@ function ViewPatientProfile() {
   const [searchText, setSearchText] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
   const [pageLimit, setPageLimit] = useState(10);
-  const [originalData, setOriginalData] = useState([
-    {
-      id: 1,
-      p_name: "John",
-      email: "john",
-      contact: "1234567890",
-      location: "london",
-    },
-    {
-      id: 2,
-      p_name: "Mary",
-      email: "mary",
-      contact: "1234567890",
-      location: "london",
-    },
-    {
-      id: 3,
-      p_name: "Peter",
-      email: "peter",
-      contact: "1234567890",
-      location: "london",
-    },
-  ]);
-  const [patientListArr, setPatientListArr] = useState(originalData);
+  const [originalData, setOriginalData] = useState();
+  const [patientListArr, setPatientListArr] = useState([]);
   const [selectedRowIndex, setSelectedRowIndex] = useState(null);
-
-  // Axios interceptor for request logging
-  useEffect(() => {
-    const requestInterceptor = axios.interceptors.request.use((request) => {
-      console.log("Starting Request", request);
-      return request;
-    });
-
-    // Axios interceptor for response logging
-    const responseInterceptor = axios.interceptors.response.use(
-      (response) => {
-        console.log("Response:", response);
-        return response;
-      },
-      (error) => {
-        console.error("Error:", error);
-        return Promise.reject(error);
-      }
-    );
-
-    // Cleanup interceptors when component unmounts
-    return () => {
-      axios.interceptors.request.eject(requestInterceptor);
-      axios.interceptors.response.eject(responseInterceptor);
-    };
-  }, []); // Empty dependency array ensures this effect runs only once
 
   const { data, error, isLoading, refetch } = useQuery({
     queryFn: async () => {
@@ -81,15 +33,14 @@ function ViewPatientProfile() {
       }
     },
     queryKey: ["patienList"],
-    onSuccess: (data) => {
-      console.log(data);
-      // Handle data here, if needed
-    },
-    onError: (error) => {
-      console.error("Error fetching data:", error);
-      // Handle error here
-    },
   });
+
+  useEffect(() => {
+    if (data && data.patients) {
+      setOriginalData(data.patients);
+      setPatientListArr(data.patients); // Update patientListArr with new data
+    }
+  }, [data]);
 
   useEffect(() => {
     refetch();
@@ -97,25 +48,29 @@ function ViewPatientProfile() {
 
   const handleRowClick = (patient, index) => {
     setSelectedRowIndex(index);
-    setPatientId(patient.id);
+    setPatientId(patient._id);
   };
 
   const handleSearchChange = (e) => {
-    const searchText = e.target.value.toLowerCase();
-    setSearchText(searchText);
-    setSelectedRowIndex(null);
-    setShowProfile(false);
-    setPatientId(null);
-    const filteredPatients = originalData.filter(
-      (patient) =>
-        patient.p_name.toLowerCase().includes(searchText) ||
-        patient.contact.toLowerCase().includes(searchText)
-    );
-    setPatientListArr(filteredPatients);
+    try {
+      const searchText = e.target.value.toLowerCase();
+      setSearchText(searchText);
+      setSelectedRowIndex(null);
+      setShowProfile(false);
+      setPatientId(null);
+      const filteredPatients = originalData.filter(
+        (patient) =>
+          patient.p_name.toLowerCase().includes(searchText) ||
+          (typeof patient.contact === 'string' && patient.contact.includes(searchText))
+      );
+      setPatientListArr(filteredPatients);
+    } catch (err) {
+      console.log("search err: ", err);
+    }
   };
 
   const selectedPatient = patientListArr.find(
-    (patient) => patient.id === patientId
+    (patient) => patient._id === patientId
   );
 
   return (
@@ -133,6 +88,7 @@ function ViewPatientProfile() {
           handleRowClick={handleRowClick}
           selectedRowIndex={selectedRowIndex}
           setSelectedRowIndex={setSelectedRowIndex}
+          
         />
         {showProfile && patientId && <ProfileDetails patient={selectedPatient} />}
       </div>
