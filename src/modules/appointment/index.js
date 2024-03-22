@@ -296,6 +296,7 @@ const [onWalkInAppointChange,setonWalkInAppointChange] = useState(false)
     setReason('');
     setNoteForDr('');
     setonWalkInAppointChange(false);
+
   };
 
   const onSubmit = () => {
@@ -357,7 +358,11 @@ const [onWalkInAppointChange,setonWalkInAppointChange] = useState(false)
           bp={bp}
           temp={temp}
           height={height}
-
+          weight={weight}
+          spo2={spo2}
+          pulseRate={pulseRate}
+          reason={reason}
+            noteForDr={noteForDr}
           />
         </div>
         
