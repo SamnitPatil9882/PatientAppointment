@@ -9,7 +9,6 @@ const VitalInfo = ({
   pulseRate,
   reason,
   noteForDr,
-  onInputChange,
   handleBpChange,
   handleTempChange,
   handleHeightChange,
@@ -20,13 +19,10 @@ const VitalInfo = ({
   handleNoteForDrChange,
 }) => {
   return (
-    <div className="details-container bg-gray-100 p-4 rounded-lg shadow-lg">
+    <div className="details-container bg-gray-100 p-4 rounded-lg shadow-lg ">
       <h1 className="text-xl font-bold mb-4">Vital Information</h1>
-      <div className="input-group flex flex-wrap">
-        <div className="w-full mb-2">
-          <label htmlFor="bp" className="input-label">
-            Blood Pressure:
-          </label>
+      <div className="grid grid-cols-2 gap-4">
+        <div className="mb-2">
           <input
             type="number"
             id="bp"
@@ -35,13 +31,10 @@ const VitalInfo = ({
             onChange={handleBpChange}
             placeholder="Blood Pressure"
             required
-            className="input-field w-full"
+            className="input-field w-full h-12 px-4"
           />
         </div>
-        <div className="w-full mb-2">
-          <label htmlFor="temp" className="input-label">
-            Temperature:
-          </label>
+        <div className="mb-2">
           <input
             type="number"
             id="temp"
@@ -50,13 +43,10 @@ const VitalInfo = ({
             onChange={handleTempChange}
             placeholder="Temperature"
             required
-            className="input-field w-full"
+            className="input-field w-full h-12 px-4"
           />
         </div>
-        <div className="w-full mb-2">
-          <label htmlFor="height" className="input-label">
-            Height:
-          </label>
+        <div className="mb-2">
           <input
             type="number"
             id="height"
@@ -65,13 +55,10 @@ const VitalInfo = ({
             onChange={handleHeightChange}
             placeholder="Height"
             required
-            className="input-field w-full"
+            className="input-field w-full h-12 px-4"
           />
         </div>
-        <div className="w-full mb-2">
-          <label htmlFor="weight" className="input-label">
-            Weight:
-          </label>
+        <div className="mb-2">
           <input
             type="number"
             id="weight"
@@ -80,13 +67,10 @@ const VitalInfo = ({
             onChange={handleWeightChange}
             placeholder="Weight"
             required
-            className="input-field w-full"
+            className="input-field w-full h-12 px-4"
           />
         </div>
-        <div className="w-full mb-2">
-          <label htmlFor="spo2" className="input-label">
-            SpO2:
-          </label>
+        <div className="mb-2">
           <input
             type="number"
             id="spo2"
@@ -95,13 +79,10 @@ const VitalInfo = ({
             onChange={handleSpo2Change}
             placeholder="SpO2"
             required
-            className="input-field w-full"
+            className="input-field w-full h-12 px-4"
           />
         </div>
-        <div className="w-full mb-2">
-          <label htmlFor="pulseRate" className="input-label">
-            Pulse Rate:
-          </label>
+        <div className="mb-2">
           <input
             type="number"
             id="pulseRate"
@@ -110,13 +91,10 @@ const VitalInfo = ({
             onChange={handlePulseRateChange}
             placeholder="Pulse Rate"
             required
-            className="input-field w-full"
+            className="input-field w-full h-12 px-4"
           />
         </div>
-        <div className="w-full mb-2">
-          <label htmlFor="reason" className="input-label">
-            Reason for Appointment:
-          </label>
+        <div className="mb-2">
           <input
             type="text"
             id="reason"
@@ -125,19 +103,16 @@ const VitalInfo = ({
             onChange={handleReasonChange}
             placeholder="Reason for Appointment"
             required
-            className="input-field w-full"
+            className="input-field w-full h-12 px-4"
           />
         </div>
-        <div className="w-full mb-2">
-          <label htmlFor="noteForDr" className="input-label">
-            Note for Doctor:
-          </label>
+        <div className="mb-2">
           <select
             id="noteForDr"
             name="noteForDr"
             value={noteForDr}
             onChange={handleNoteForDrChange}
-            className="input-field w-full"
+            className="input-field w-full h-12 px-4"
           >
             <option value="lmn">LMN</option>
             <option value="jkl">JKL</option>

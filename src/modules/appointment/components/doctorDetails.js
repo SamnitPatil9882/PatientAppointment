@@ -17,10 +17,14 @@ const DoctorDetails = ({
 }) => {
   // console.log("doctors: ", doctors);
   return (
-    <div className="details-container">
-      <h1>Doctor Details</h1>
+    <div className="details-container p-4 rounded-lg shadow-lg h-full">
+      <h1 className="text-xl font-bold mb-4">Doctor Details</h1>
       {/* Doctor selection */}
-      <select value={selectedDoctorId} onChange={handleDoctorSelectChange}>
+      <select 
+        value={selectedDoctorId} 
+        onChange={handleDoctorSelectChange}
+        className="input-field mb-4"
+      >
         <option value="">Select Doctor</option>
         {doctors.map((doctor) => (
           <option key={doctor._id} value={doctor.d_name}>
@@ -29,10 +33,14 @@ const DoctorDetails = ({
         ))}
       </select>
       {/* Appointment channel selection */}
-      <select value={channel} onChange={handleChannelChange}>
-        <option value="">select medium</option>
-        <option value="clinic">clinic</option>
-        <option value="home">home</option>
+      <select 
+        value={channel} 
+        onChange={handleChannelChange}
+        className="input-field mb-4"
+      >
+        <option value="">Select Medium</option>
+        <option value="clinic">Clinic</option>
+        <option value="home">Home</option>
       </select>
       {/* Appointment title input */}
       <input
@@ -41,6 +49,7 @@ const DoctorDetails = ({
         onChange={handleTitleChange}
         placeholder="Appointment Title"
         required
+        className="input-field mb-4"
       />
     </div>
   );

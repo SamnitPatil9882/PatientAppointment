@@ -18,31 +18,24 @@ const AppointmentDetails = ({
   handleAppointTypeChange,
   appointmentDetails,
   handleonWalkInAppointChange
-
-
-
 }) => {
   // console.log("patients: " + patients);
   return (
-    <div className="details-container bg-white rounded-lg shadow-md p-6">
+    <div className="details-container bg-white rounded-lg shadow-md p-6 mb-6 h-full">
       <h2 className="text-2xl font-semibold mb-6">Appointment Details</h2>
-      <div className="mb-4 flex">
-        <label
-          className="block text-gray-700 font-medium mb-2"
-          htmlFor="patientName"
-        >
-          Patient Name:
-        </label>
-        <div className="text-gray-800 font-semibold">{patients?.p_name}</div>
+      <div className="flex justify-evenly">
+      <div className="mb-4 flex ">
+        <div className="text-gray-800 font-semibold flex ">{patients?.p_name}</div>
       </div>
       <div className="mb-4 flex">
-        <label
+      <label
           className="block text-gray-700 font-medium mb-2"
           htmlFor="patientId"
         >
-          Patient ID:
+          PID-
         </label>
         <div className="text-gray-800 font-semibold">{patients?._id}</div>
+      </div>
       </div>
       <div className="mb-4 flex">
         <label className="inline-flex items-center">

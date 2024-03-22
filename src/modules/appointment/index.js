@@ -295,7 +295,8 @@ const [onWalkInAppointChange,setonWalkInAppointChange] = useState(false)
   const handlePatientSelect = (patientId) => {};
 
   return (
-    <div className="container mx-auto p-5">
+    <div className="w-screen h-screen bg-blue-50">
+      <div className="container mx-auto p-5 ">
       <div className="grid grid-cols-2 gap-4">
         {doctorsInfoData && (
           <div>
@@ -330,7 +331,7 @@ const [onWalkInAppointChange,setonWalkInAppointChange] = useState(false)
             </div>
           )}
       </div>
-      <div className="grid grid-cols-2 gap-4 mt-4">
+      <div className="grid grid-cols-1 gap-4 mt-4">
         <div>
           <VitalInfo 
           handleBpChange={handleBpChange}
@@ -347,15 +348,16 @@ const [onWalkInAppointChange,setonWalkInAppointChange] = useState(false)
 
           />
         </div>
-        <div>
+        
+      </div>
+      <div className="m-5">
           <Buttons 
             createAppointment={createAppointment}
             onReset={onReset}
             onSubmit={onSubmit}
           />
         </div>
-      </div>
-      appointement page
+    </div>
     </div>
   );
 }
