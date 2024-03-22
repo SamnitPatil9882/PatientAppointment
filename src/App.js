@@ -14,7 +14,7 @@ function App() {
         <div className="App">
           <Routes>
             <Route path="/" element={<ViewPatientProfile />} />
-            <Route path="/appoint" element={<Appointment />} />
+            <Route path="/appoint/:id" element={<Appointment />} />
           </Routes>
         </div>
       </QueryClientProvider>
