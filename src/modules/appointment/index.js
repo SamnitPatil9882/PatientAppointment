@@ -6,8 +6,10 @@ import Buttons from "./components/buttonGroup";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useMutation, useQuery } from "@tanstack/react-query";
+import { notification } from 'antd';
 
 function AppointmentBooking() {
+  const [api, contextHolder] = notification.useNotification();
   const { id } = useParams(); // Accessing the route parameters
   // console.log("id: ", id);
 
@@ -236,11 +238,20 @@ const [onWalkInAppointChange,setonWalkInAppointChange] = useState(false)
     mutationKey: ["createAppointment"],
     onSuccess(data){
       console.log(data);
+      api.open({
+        message: 'Appointment created successfully',
+        description:
+          'Have a nice day!!',
+      });
+      onReset();
       // Handle success response
     },
     onError(error){
       console.log(error);
       // Handle error response
+      api.open({
+        message: 'Enter valid data',
+      });
     }
   });
   // Reset form fields
@@ -296,6 +307,7 @@ const [onWalkInAppointChange,setonWalkInAppointChange] = useState(false)
 
   return (
     <div className="w-screen h-screen bg-blue-50">
+      {contextHolder}
       <div className="container mx-auto p-5 ">
       <div className="grid grid-cols-2 gap-4">
         {doctorsInfoData && (
