@@ -11,6 +11,7 @@ function ViewPatientProfile() {
   const [searchText, setSearchText] = useState("");
   const [pageNumber, setPageNumber] = useState(1);
   const [pageLimit, setPageLimit] = useState(10);
+  const [pageCount, setPageCount] = useState(1)
   const [originalData, setOriginalData] = useState();
   const [patientListArr, setPatientListArr] = useState([]);
   const [selectedRowIndex, setSelectedRowIndex] = useState(null);
@@ -35,10 +36,21 @@ function ViewPatientProfile() {
     queryKey: ["patienList"],
   });
 
+  const handleNextClick = () =>{
+    if(pageNumber)
+    setPageNumber(pageNumber + 1);
+  }
+
+  const handlePrevClick = () =>{
+    if(pageNumber>1)
+    setPageNumber(pageNumber - 1);
+  }
+
   useEffect(() => {
     if (data && data.patients) {
       setOriginalData(data.patients);
       setPatientListArr(data.patients); // Update patientListArr with new data
+      setPageCount(data.totalPages);
     }
   }, [data]);
 
@@ -88,7 +100,10 @@ function ViewPatientProfile() {
           handleRowClick={handleRowClick}
           selectedRowIndex={selectedRowIndex}
           setSelectedRowIndex={setSelectedRowIndex}
-          
+          handleNextClick={handleNextClick}
+          handlePrevClick={handlePrevClick}
+          pageNumber={pageNumber}
+          pageCount={pageCount}
         />
         {showProfile && patientId && <ProfileDetails patient={selectedPatient} />}
       </div>

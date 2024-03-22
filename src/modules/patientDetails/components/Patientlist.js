@@ -1,8 +1,17 @@
 import React, { useState } from "react";
 
-function Patientlist({ patientListArr, setPatientId, setShowProfile ,handleRowClick,setSelectedRowIndex,selectedRowIndex}) {
- 
-
+function Patientlist({
+  patientListArr,
+  setPatientId,
+  setShowProfile,
+  handleRowClick,
+  setSelectedRowIndex,
+  selectedRowIndex,
+  handleNextClick,
+  handlePrevClick,
+  pageNumber,
+  pageCount,
+}) {
   return (
     <div className="flex flex-col border-8 items-center justify-center">
       <div className="w-full">
@@ -32,7 +41,7 @@ function Patientlist({ patientListArr, setPatientId, setShowProfile ,handleRowCl
                     index === selectedRowIndex ? "bg-blue-200" : "bg-white"
                   }
                   onClick={() => {
-                    handleRowClick(patient,index);
+                    handleRowClick(patient, index);
                     setShowProfile(false);
                   }}
                 >
@@ -52,11 +61,11 @@ function Patientlist({ patientListArr, setPatientId, setShowProfile ,handleRowCl
           {selectedRowIndex !== null ? "1 row selected" : ""}
         </div>
         <div className="flex items-center justify-end w-1/2 px-4">
-          <div className="mr-2 text-gray-700">6 - 10 of 20 </div>
-          <button className="mr-2 bg-blue-500 text-white px-3 py-1 rounded">
+          <div className="mr-2 text-gray-700">{pageNumber} of {pageCount} </div>
+          <button onClick={handlePrevClick} className="mr-2 bg-blue-500 text-white px-3 py-1 rounded">
             prev
           </button>
-          <button className="mr-2 bg-blue-500 text-white px-3 py-1 rounded">
+          <button onClick={handleNextClick} className="mr-2 bg-blue-500 text-white px-3 py-1 rounded">
             next
           </button>
         </div>
