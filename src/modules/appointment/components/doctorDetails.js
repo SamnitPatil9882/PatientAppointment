@@ -1,29 +1,46 @@
-import React from 'react';
+import React, { useState } from "react";
 
-const DoctorDetails = ({ doctors, onSelectDoctor, appointChannel, appointTitle, onAppointChannelChange, onAppointTitleChange }) => {
+const DoctorDetails = ({
+  doctors,
+  onSelectDoctor,
+  appointChannel,
+  appointTitle,
+  onAppointChannelChange,
+  onAppointTitleChange,
+  channel,
+  title,
+  handleChannelChange,
+  handleTitleChange,
+  selectedDoctorId,  
+  setSelectedDoctorId,
+  handleDoctorSelectChange
+}) => {
+  // console.log("doctors: ", doctors);
   return (
     <div className="details-container">
       <h1>Doctor Details</h1>
-      <select onChange={onSelectDoctor}>
-        {doctors.map(doctor => (
-          <option key={doctor._id} value={doctor._id}>
+      {/* Doctor selection */}
+      <select value={selectedDoctorId} onChange={handleDoctorSelectChange}>
+        <option value="">Select Doctor</option>
+        {doctors.map((doctor) => (
+          <option key={doctor._id} value={doctor.d_name}>
             {doctor.d_name}
           </option>
         ))}
       </select>
-      <input 
+      {/* Appointment channel selection */}
+      <select value={channel} onChange={handleChannelChange}>
+        <option value="">select medium</option>
+        <option value="clinic">clinic</option>
+        <option value="home">home</option>
+      </select>
+      {/* Appointment title input */}
+      <input
         type="text"
-        value={appointChannel}
-        onChange={onAppointChannelChange}
-        placeholder="Appointment Channel"
-        required 
-      />
-      <input 
-        type="text"
-        value={appointTitle}
-        onChange={onAppointTitleChange}
+        value={title}
+        onChange={handleTitleChange}
         placeholder="Appointment Title"
-        required 
+        required
       />
     </div>
   );

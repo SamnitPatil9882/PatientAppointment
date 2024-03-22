@@ -5,6 +5,7 @@ import ViewPatientProfile from "./modules/patientDetails";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Appointment from "./modules/appointment";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import AppointmentBooking from "./modules/appointment";
 
 const queryClient = new QueryClient();
 function App() {
@@ -14,7 +15,7 @@ function App() {
         <div className="App">
           <Routes>
             <Route path="/" element={<ViewPatientProfile />} />
-            <Route path="/appoint/:id" element={<Appointment />} />
+            <Route path="/appoint/:id" element={<AppointmentBooking />} />
           </Routes>
         </div>
       </QueryClientProvider>
